@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" rel="stylesheet">
+    <title>Home</title>
+
+    <style>
+        nav a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            line-height: 1;
+            text-decoration: none;
+            color: white;
+            background-color: #2274a5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease-in-out;
+        }
+
+        nav a:hover {
+            background-color: #3b9ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        a[role="button"] {
+            display: inline-block;
+            padding: 0.35em 1.2em;
+            border: 0.1em solid #000000;
+            margin: 0 0.3em 0.3em 0;
+            border-radius: 0.12em;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #000000;
+            text-align: center;
+            background-color: #ff0000;
+            transition: all 0.2s;
+        }
+
+        a[role="button"]:hover {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">
+        <img alt="" class="d-inline-block align-top" height="20" src="/Images/airplane.svg" width="20">
+        FightAware
+    </a>
+    <li class="nav-item">
+        <a class=" btn btn-success " href="/flightSchedules" role="button">Flight Dates</a>
+        <a class=" btn btn-success " href="/uguides" role="button">User Guides</a>
+        <a class=" btn btn-success " href="/countryList" role="button">Countries</a>
+        <a class=" btn btn-success " href="/currencyList" role="button">Currencies</a>
+        <a class=" btn btn-success " href="/bestFlight" role="button">Flight price</a>
+        <a class=" btn btn-success " href="/cities" role="button">Cities to visit</a>
+    </li>
+
+</nav>
+<div class="container">
+    <form action="#" class="form-horizontal" method="post" style="border:solid 1px" th:action="@{/flightSchedules}"
+          th:object="${userip}">
+        <div class="form-group">
+            <div class="col-xs-8">
+                <input class="form-control" name="ques" placeholder="Enter Depature IATA Code " th:field="*{depature}"
+                       type="text"></input>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8">
+                <input class="form-control" name="ques" placeholder="Enter Destination IATA Code" th:field="*{arrival}"
+                       type="text"></input>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8">
+                <input class="form-control" name="ques" placeholder="Enter Date  (must be in yyyy-mm-dd format)"
+                       th:field="*{date}" type="text"></input>
+            </div>
+        </div>
+        <div class="row">
+            <center>
+                <input class="btn btn-primary" type="submit" value="Get Result"></input>
+        </div>
+        </center>
+    </form>
+    </form>
+</div>
+<center>
+    <div>
+        <h1>Flight Schedules</h1>
+        <div th:if="${flightDetails == null || flightDetails.isEmpty()}">
+            <p>There are no flights available.</p>
+        </div>
+        <table border="1" class="table" th:if="${flightDetails != null && !flightDetails.isEmpty()}">
+            <thead class="thead-light">
+            <tr>
+                <th>Flight Number</th>
+                <th>Airlines Name</th>
+                <th>Depature Airport</th>
+                <th>Arrival Airport</th>
+                <th>Start Date & Time</th>
+                <th>End Date & Time</th>
+            </tr>
+            <tr th:each="detail : ${flightDetails}">
+                <td th:text="${detail.flightNumber}"></td>
+                <td th:text="${detail.airlinesName}"></td>
+                <td th:text="${detail.depatureAirport}"></td>
+                <td th:text="${detail.arrivalAirport}"></td>
+                <td th:text="${detail.startDate}"></td>
+                <td th:text="${detail.endDate}"></td>
+            </tr>
+        </table>
+
+
+    </div>
+    </div>
+    </div>
+</center>
+
+</body>
+</html> 

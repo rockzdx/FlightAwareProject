@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" rel="stylesheet">
+    <title>Home</title>
+
+    <style>
+        nav a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            line-height: 1;
+            text-decoration: none;
+            color: white;
+            background-color: #2274a5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease-in-out;
+        }
+
+        nav a:hover {
+            background-color: #3b9ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        a[role="button"] {
+            display: inline-block;
+            padding: 0.35em 1.2em;
+            border: 0.1em solid #000000;
+            margin: 0 0.3em 0.3em 0;
+            border-radius: 0.12em;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #000000;
+            text-align: center;
+            background-color: #ff0000;
+            transition: all 0.2s;
+        }
+
+        a[role="button"]:hover {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">
+        <img alt="" class="d-inline-block align-top" height="20" src="/Images/airplane.svg" width="20">
+        FightAware
+    </a>
+
+    <li class="nav-item">
+        <a class="btn btn-warning " href="/Register" role="button">Register</a>
+        <a class=" btn btn-warning " href="/Login" role="button"> Login</a>
+    </li>
+
+</nav>
+<div class="container">
+    <form action="#" method="post" style="border:solid 1px" th:action="@{/Login}" th:object="${user}">
+
+        <center><h5>Please Enter your login details</h5></center>
+        <div class="container">
+            <div class="form-group">
+                <div class="col-xs-8">
+                    <input class="form-control" name="ques" placeholder="Enter Email Id" th:field="*{emailId}"
+                           type="email"></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-8">
+                    <input class="form-control" name="ques" placeholder="Enter Password" th:field="*{Pass}"
+                           type="password"></input>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
